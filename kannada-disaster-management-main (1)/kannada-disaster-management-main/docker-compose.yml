@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  disaster-assistant:
+    build: .
+    container_name: kannada_disaster_ai
+    restart: always
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./.env:/app/.env
+      - ./data:/app/data
+      - ./static/audio:/app/static/audio
+    environment:
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
